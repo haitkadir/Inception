@@ -1,0 +1,40 @@
+services:
+  db:
+    image: mariadb
+    volumes:
+      - ./requirements/mariadb/db:/var/lib/mysql
+    environment:
+      MARIADB_DATABASE: Wordpress
+      MARIADB_ROOT_PASSWORD: RootPass
+      MARIADB_USER: john
+      MARIADB_PASSWORD: JohnPass
+    restart: always
+
+  wordpress:
+    image: wordpress:php8.2-fpm-alpine
+    container_name: wordpress
+    volumes:
+      - ./requirements/wordpress/data:/var/www/html
+    depends_on:
+      - db
+    environment:
+      WORDPRESS_DB_HOST: db
+      MARIADB_ROOT_PASSWORD: RootPass
+      WORDPRESS_DB_NAME: Wordpress
+      WORDPRESS_DB_USER: john
+      WORDPRESS_DB_PASSWORD: JohnPass
+      WORDPRESS_TABLE_PREFIX: wp_
+    restart: always
+  
+  nginx:
+    # image: nginx:stable-alpine3.17-slim
+    build: ./requirements/nginx
+    container_name: nginx_c
+    volumes:
+      - ./requirements/wordpress/data:/var/www/html
+      # - ./requirements/nginx/conf:/etc/nginx/conf.d
+    ports:
+      - "8080:80"
+    restart: always
+
+

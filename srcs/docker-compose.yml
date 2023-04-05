@@ -34,7 +34,10 @@ services:
       - ./requirements/wordpress/data:/var/www/html
       # - ./requirements/nginx/conf:/etc/nginx/conf.d
     ports:
+      - "443:443"
       - "8080:80"
+    hostname: haitkadi.42.fr
     restart: always
 
 
+ 

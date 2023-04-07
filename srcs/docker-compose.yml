@@ -3,11 +3,13 @@ services:
     image: mariadb
     volumes:
       - ./requirements/mariadb/db:/var/lib/mysql
+    env_file:
+      - ./.env
     environment:
-      MARIADB_DATABASE: Wordpress
-      MARIADB_ROOT_PASSWORD: RootPass
-      MARIADB_USER: john
-      MARIADB_PASSWORD: JohnPass
+      MARIADB_DATABASE: ${DB_NAME}
+      MARIADB_ROOT_PASSWORD: ${ROOT_PASS}
+      MARIADB_USER: ${DB_USER}
+      MARIADB_PASSWORD: ${USER_PASS}
     restart: always
 
   wordpress:
@@ -17,26 +19,24 @@ services:
       - ./requirements/wordpress/data:/var/www/html
     depends_on:
       - db
+    env_file:
+      - ./.env
     environment:
       WORDPRESS_DB_HOST: db
-      MARIADB_ROOT_PASSWORD: RootPass
-      WORDPRESS_DB_NAME: Wordpress
-      WORDPRESS_DB_USER: john
-      WORDPRESS_DB_PASSWORD: JohnPass
+      MARIADB_ROOT_PASSWORD: ${ROOT_PASS}
+      WORDPRESS_DB_NAME: ${DB_NAME}
+      WORDPRESS_DB_USER: ${DB_USER}
+      WORDPRESS_DB_PASSWORD: ${USER_PASS}
       WORDPRESS_TABLE_PREFIX: wp_
     restart: always
   
   nginx:
-    # image: nginx:stable-alpine3.17-slim
     build: ./requirements/nginx
     container_name: nginx_c
     volumes:
       - ./requirements/wordpress/data:/var/www/html
-      # - ./requirements/nginx/conf:/etc/nginx/conf.d
     ports:
       - "443:443"
-      - "8080:80"
-    hostname: haitkadi.42.fr
     restart: always
 
 

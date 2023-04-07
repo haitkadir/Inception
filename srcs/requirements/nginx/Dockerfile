@@ -23,7 +23,7 @@ RUN apt-get update \
 
 COPY ./conf/ /etc/nginx/sites-available/
 
-EXPOSE 80 443
+EXPOSE 443
 
 CMD ["nginx", "-g", "daemon off;"]
 

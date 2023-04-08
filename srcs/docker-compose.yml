@@ -1,10 +1,10 @@
 services:
   db:
-    image: mariadb
+    # image: mariadb
+    build: ./requirements/mariadb
+    container_name: mariadb_c
     volumes:
       - ./requirements/mariadb/db:/var/lib/mysql
-    env_file:
-      - ./.env
     environment:
       MARIADB_DATABASE: ${DB_NAME}
       MARIADB_ROOT_PASSWORD: ${ROOT_PASS}
@@ -19,8 +19,6 @@ services:
       - ./requirements/wordpress/data:/var/www/html
     depends_on:
       - db
-    env_file:
-      - ./.env
     environment:
       WORDPRESS_DB_HOST: db
       MARIADB_ROOT_PASSWORD: ${ROOT_PASS}

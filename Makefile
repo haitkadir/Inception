@@ -1,9 +1,9 @@
 
 all:
-	sudo docker-compose -f ./srcs/docker-compose.yml up -d
+	sudo docker-compose -f ./srcs/docker-compose.yml up 
 
 rebuild:
-	sudo docker-compose -f ./srcs/docker-compose.yml up -d --build 
+	sudo docker-compose -f ./srcs/docker-compose.yml up   --build 
 
 clean:
 	sudo docker-compose -f ./srcs/docker-compose.yml down
@@ -13,7 +13,7 @@ clean:
 	mkdir -p ./srcs/requirements/mariadb/db
 
 
-fclean:
+fclean: clean
 	sudo docker-compose -f ./srcs/docker-compose.yml down --rmi all -v
 
 re: clean rebuild

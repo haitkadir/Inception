@@ -1,11 +1,16 @@
 #!/bin/bash
 
-service mysql start
+service mysql start 
 
-if [ $? -eq 0 ]
-then
-    echo "$MARIADB_ROOT_PASSWORD"
+sleep 1
+
+# if [ $? -eq 0 ]
+# then
+    echo "/////////////////////////////////// $MARIADB_ROOT_PASSWORD \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"
     echo "1"
+    mysql -u root -p"$MARIADB_ROOT_PASSWORD" -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$MARIADB_ROOT_PASSWORD';"
+    echo "7"
+    # mysql -u root -p"$MARIADB_ROOT_PASSWORD" -e "UPDATE mysql.user SET plugin = 'MARIADB_native_password' WHERE user = 'root';"
     mysql -u root -p"$MARIADB_ROOT_PASSWORD" -e "DELETE FROM mysql.user WHERE User='';"
     echo "2"
     mysql -u root -p"$MARIADB_ROOT_PASSWORD" -e "DROP DATABASE IF EXISTS test;"
@@ -16,17 +21,16 @@ then
     echo "5"
     mysql -u root -p"$MARIADB_ROOT_PASSWORD" -e "GRANT ALL PRIVILEGES ON $MARIADB_DATABASE.* TO '$MARIADB_USER'@'%';"
     echo "6"
-    mysql -u root -p"$MARIADB_ROOT_PASSWORD" -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$MARIADB_ROOT_PASSWORD';"
-    echo "7"
-    mysql -u root -p"$MARIADB_ROOT_PASSWORD" -e "UPDATE mysql.user SET plugin = 'MARIADB_native_password' WHERE user = 'root';"
     echo "8"
     mysql -u root -p"$MARIADB_ROOT_PASSWORD" -e "FLUSH PRIVILEGES;"
     echo "Success"
-else
-    echo "==========================( Error Starting mysql )=============================="
-fi
+# else
+#     echo "==========================( Error Starting mysql )=============================="
+# fi
 
-# Start MariaDB service
-exec mysqld
+# sleep 1
 
-# mysqld_safe --user="$MARIADB_USER" --datadir=/var/lib/mysql --log-error=/var/log/mysql/error.log
+mysqladmin -u root -p$MARIADB_ROOT_PASSWORD shutdown
+# kill $(cat /var/run/mysqld/mysqld.pid)
+
+exec "mysqld_safe"

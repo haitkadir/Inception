@@ -15,7 +15,7 @@ RUN sed -i 's/bind-address/bind-address = 0.0.0.0 #/i' /etc/mysql/mariadb.conf.d
 
 # WORKDIR /docker-intrepoint.d/
 
-COPY ./conf/setup.sh .
+COPY ./tools/setup.sh .
 
 RUN chmod +x setup.sh
 

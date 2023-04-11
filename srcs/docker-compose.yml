@@ -5,31 +5,23 @@ services:
     container_name: mariadb_c
     volumes:
       - mariadb_db:/var/lib/mysql
-    environment:
-      MARIADB_DATABASE: ${DB_NAME}
-      MARIADB_ROOT_PASSWORD: ${ROOT_PASS}
-      MARIADB_USER: ${DB_USER}
-      MARIADB_PASSWORD: ${USER_PASS}
-    # networks:
-    #   - np
+    env_file:
+      - ./.env
+    networks:
+      - np
     restart: always
 
   wordpress:
-    image: wordpress:php8.2-fpm-alpine
-    container_name: wordpress
+    build: ./requirements/wordpress
+    container_name: wordpress_c
     volumes:
       - wordpress_db:/var/www/html
     depends_on:
       - db
-    environment:
-      WORDPRESS_DB_HOST: db
-      MARIADB_ROOT_PASSWORD: ${ROOT_PASS}
-      WORDPRESS_DB_NAME: ${DB_NAME}
-      WORDPRESS_DB_USER: ${DB_USER}
-      WORDPRESS_DB_PASSWORD: ${USER_PASS}
-      WORDPRESS_TABLE_PREFIX: wp_
-    # networks:
-    #   - np
+    env_file:
+      - ./.env
+    networks:
+      - np
     restart: always
   
   nginx:
@@ -42,8 +34,9 @@ services:
     ports:
       - "443:443"
     restart: always
-    # networks:
-    #   - np
+    networks:
+      - np
+
 volumes:
     mariadb_db:
       driver_opts:
@@ -55,8 +48,8 @@ volumes:
         type: none
         o: bind
         device: /home/ubuntu/Desktop/Inception/srcs/requirements/wordpress/data
-# networks:
-#       np:
-#         driver: bridge
+networks:
+      np:
+        driver: bridge
  
  

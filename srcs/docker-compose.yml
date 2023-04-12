@@ -29,10 +29,13 @@ services:
     container_name: nginx_c
     depends_on:
       - wordpress
+    env_file:
+      - ./.env
     volumes:
       - wordpress_db:/var/www/html
     ports:
       - "443:443"
+      - "88:80"
     restart: always
     networks:
       - np
@@ -42,12 +45,12 @@ volumes:
       driver_opts:
         type: none
         o: bind
-        device: /home/ubuntu/Desktop/Inception/srcs/requirements/mariadb/db     
+        device: /home/ubuntu/data/db     
     wordpress_db:
       driver_opts:
         type: none
         o: bind
-        device: /home/ubuntu/Desktop/Inception/srcs/requirements/wordpress/data
+        device: /home/ubuntu/data/site-files
 networks:
       np:
         driver: bridge

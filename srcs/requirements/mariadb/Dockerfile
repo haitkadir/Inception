@@ -1,28 +1,19 @@
 FROM debian:buster
 
-# Set the root password for MariaDB
-# ENV MARIADB_ROOT_PASSWORD mypassword
-# ENV MARIADB_USER db_user
-# ENV MARIADB_PASSWORD db_password
-# ENV MARIADB_DATABASE mydatabase
 
-# Install MariaDB and its dependencies
 RUN apt-get update && \
-    apt-get install -y mariadb-server
-    # rm -rf /var/lib/apt/lists/*
+    apt-get install -y mariadb-server \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN sed -i 's/bind-address/bind-address = 0.0.0.0 #/i' /etc/mysql/mariadb.conf.d/50-server.cnf
+COPY ./conf /etc/mysql/mariadb.conf.d
 
-# WORKDIR /docker-intrepoint.d/
+COPY ./tools setup.d
 
-COPY ./tools/setup.sh .
-
-RUN chmod +x setup.sh
+RUN chmod +x /setup.d/setup.sh
 
 
-# Expose the MySQL port
 EXPOSE 3306
 
-# Start the MySQL server
-CMD ["./setup.sh"]
+CMD ["/setup.d/setup.sh"]
 

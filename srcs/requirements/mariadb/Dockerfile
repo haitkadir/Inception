@@ -8,12 +8,13 @@ RUN apt-get update && \
 
 COPY ./conf /etc/mysql/mariadb.conf.d
 
-COPY ./tools setup.d
+COPY ./tools entrypoint.d
 
-RUN chmod +x /setup.d/setup.sh
-
+RUN chmod +x /entrypoint.d/setup.sh
 
 EXPOSE 3306
 
-CMD ["/setup.d/setup.sh"]
+ENTRYPOINT [ "/entrypoint.d/setup.sh" ]
+
+CMD ["mysqld_safe"]
 

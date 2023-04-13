@@ -51,4 +51,4 @@ find /var/www/html/ -type f -exec chmod 640 {} \;
 #Clear unnecessary files
 rm -rf /tmp/* /var/tmp/*
 
-exec php-fpm8.2 -F
+exec "$@"

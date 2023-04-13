@@ -1,7 +1,8 @@
+version: '3.8'
 services:
-  db:
-    # image: mariadb
+  mariadb:
     build: ./requirements/mariadb
+    image: mariadb:latest
     container_name: mariadb_c
     volumes:
       - mariadb_db:/var/lib/mysql
@@ -13,11 +14,12 @@ services:
 
   wordpress:
     build: ./requirements/wordpress
+    image: wordpress:latest
     container_name: wordpress_c
     volumes:
       - wordpress_db:/var/www/html
     depends_on:
-      - db
+      - mariadb
     env_file:
       - ./.env
     networks:
@@ -26,6 +28,7 @@ services:
   
   nginx:
     build: ./requirements/nginx
+    image: nginx:latest
     container_name: nginx_c
     depends_on:
       - wordpress

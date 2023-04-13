@@ -13,10 +13,12 @@ RUN mkdir /run/php && chown www-data:www-data /run/php && chmod 755 /run/php
 
 COPY ./conf /etc/php/8.2/fpm/pool.d
 
-COPY ./tools/setup.sh setup.d/
+COPY ./tools/setup.sh entrypoint.d/
 
-RUN  chmod +x /setup.d/setup.sh
+RUN  chmod +x /entrypoint.d/setup.sh
 
 EXPOSE 9000
 
-CMD [ "/setup.d/setup.sh"]
+ENTRYPOINT [ "/entrypoint.d/setup.sh" ]
+
+CMD [ "php-fpm8.2", "-F"]

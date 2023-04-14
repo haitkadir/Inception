@@ -46,7 +46,7 @@ chmod +x /tmp/wp-cli.phar
 mkdir -p /var/www/html
 cd /var/www/html
 /tmp/wp-cli.phar core download --allow-root
-echo "$wp_config" >> /var/www/html/wp-config.php
+echo "$wp_config" > /var/www/html/wp-config.php
 chown -R www-data:www-data /var/www/html
 find /var/www/html/ -type d -exec chmod 750 {} \;
 find /var/www/html/ -type f -exec chmod 640 {} \;

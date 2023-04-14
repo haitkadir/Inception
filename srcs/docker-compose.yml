@@ -20,6 +20,7 @@ services:
       - wordpress_db:/var/www/html
     depends_on:
       - mariadb
+      - redis
     env_file:
       - ./.env
     networks:
@@ -38,11 +39,19 @@ services:
       - wordpress_db:/var/www/html
     ports:
       - "443:443"
-      - "88:80"
+    restart: always
+    networks:
+      - np
+# ============================= Bonus part ===============================
+  redis:
+    build: ./requirements/bonus/redis
+    image: redis:latest
+    container_name: redis_c
     restart: always
     networks:
       - np
 
+# ============================= Volumes and stuff ==========================
 volumes:
     mariadb_db:
       driver_opts:

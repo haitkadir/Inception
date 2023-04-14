@@ -14,7 +14,7 @@ COPY ./conf/ /etc/nginx/conf.d/
 COPY ./tools/ entrypoint.d
 RUN chmod +x /entrypoint.d/setup.sh
 
-EXPOSE 443 80
+EXPOSE 443
 ENTRYPOINT ["/entrypoint.d/setup.sh"]
 
 CMD ["nginx", "-g", "daemon off;"]

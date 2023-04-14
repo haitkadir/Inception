@@ -1,6 +1,11 @@
 #!/bin/bash
 
 wp_config="<?php
+
+// ** Enable chaching  ** //
+define('WP_CACHE', 'true');
+define('WP_REDIS_HOST', 'redis');
+define('WP_REDIS_PORT', '6379');
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
 define( 'DB_NAME', '$WORDPRESS_DB_NAME' );
@@ -47,7 +52,8 @@ find /var/www/html/ -type d -exec chmod 750 {} \;
 find /var/www/html/ -type f -exec chmod 640 {} \;
 /tmp/wp-cli.phar core install --allow-root --url=$DOMAIN_NAME --title=$WORDPRESS_SITE_TITLE --admin_user=$WORDPRESS_SITE_ADMIN_USER --admin_password=$WORDPRESS_SITE_ADMIN_PASSWORD --admin_email=$WORDPRESS_SITE_ADMIN_EMAIL
 /tmp/wp-cli.phar user create --allow-root  $WORDPRESS_SITE_USER $WORDPRESS_SITE_USER_EMAIL --role=author --user_pass=$WORDPRESS_SITE_USER_PASSWORD
-
+/tmp/wp-cli.phar plugin install --allow-root redis-cache --activate
+/tmp/wp-cli.phar redis enable --allow-root
 #Clear unnecessary files
 rm -rf /tmp/* /var/tmp/*
 

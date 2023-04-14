@@ -1,15 +1,15 @@
 FROM debian:buster
 
-RUN apt-get update && apt-get install -y lsb-release curl gnupg vim \
-    && curl -fsSL https://packages.redis.io/gpg | gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg \
-    && echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/redis.list \
-    && apt-get update && apt-get install -y redis
+RUN apt-get update && apt-get install -y redis-server
 
 
-COPY ./conf /etc/redis
 
+RUN sed -i 's/^daemonize yes/daemonize no/' /etc/redis/redis.conf \
+    && sed -i 's/^bind 127.0.0.1 -::1/bind 0.0.0.0 ::/' etc/redis/redis.conf \
+    && sed -i 's/^# save ""/save 60 1000/' etc/redis/redis.conf \
+    && sed -i 's/^# maxmemory <bytes>/maxmemory 128mb/' etc/redis/redis.conf \
+    && sed -i 's/^# maxmemory-policy noeviction/maxmemory-policy allkeys-lru/' etc/redis/redis.conf
 
 EXPOSE 6379
 
-
-CMD [ "/etc/init.d/redis-server", "start" ]
+CMD [ "redis-server", "--protected-mode", "no" ]

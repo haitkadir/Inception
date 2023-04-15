@@ -55,12 +55,14 @@ services:
     build: ./requirements/bonus/ftp
     image: ftp:latest
     container_name: ftp_c
+    depends_on:
+      - wordpress
     volumes:
       - wordpress_db:/home/${FTP_USER}/ftp
     ports:
       - "21:21"
       - "20:20"
-      - "1024-1048:1024-1048"
+      - "40000-50000:40000-50000"
     environment:
       - FTP_USER=${FTP_USER}
       - FTP_PASS=${FTP_PASS}
@@ -73,12 +75,12 @@ volumes:
       driver_opts:
         type: none
         o: bind
-        device: /home/ubuntu/data/db     
+        device: /home/haitkadi/data/db     
     wordpress_db:
       driver_opts:
         type: none
         o: bind
-        device: /home/ubuntu/data/site-files
+        device: /home/haitkadi/data/site-files
 networks:
       np:
         driver: bridge

@@ -51,6 +51,22 @@ services:
     networks:
       - np
 
+  ftp:
+    build: ./requirements/bonus/ftp
+    image: ftp:latest
+    container_name: ftp_c
+    volumes:
+      - wordpress_db:/home/${FTP_USER}/ftp
+    ports:
+      - "21:21"
+      - "20:20"
+      - "1024-1048:1024-1048"
+    environment:
+      - FTP_USER=${FTP_USER}
+      - FTP_PASS=${FTP_PASS}
+    restart: always
+    networks:
+      - np
 # ============================= Volumes and stuff ==========================
 volumes:
     mariadb_db:

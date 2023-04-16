@@ -62,7 +62,7 @@ services:
     ports:
       - "21:21"
       - "20:20"
-      - "40000-50000:40000-50000"
+      - "1025-2025:1025-2025"
     environment:
       - FTP_USER=${FTP_USER}
       - FTP_PASS=${FTP_PASS}
@@ -75,12 +75,12 @@ volumes:
       driver_opts:
         type: none
         o: bind
-        device: /home/haitkadi/data/db     
+        device: /home/ubuntu/data/db     
     wordpress_db:
       driver_opts:
         type: none
         o: bind
-        device: /home/haitkadi/data/site-files
+        device: /home/ubuntu/data/site-files
 networks:
       np:
         driver: bridge

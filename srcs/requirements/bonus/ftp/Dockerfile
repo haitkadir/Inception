@@ -8,7 +8,7 @@ COPY ./tools/setup.sh /entrypoint.d/
 
 RUN chmod +x /entrypoint.d/setup.sh
 
-EXPOSE 20 21 40000-50000
+EXPOSE 20 21 1025-2025
 
 ENTRYPOINT [ "/entrypoint.d/setup.sh" ]
 

@@ -11,7 +11,6 @@ RUN apt-get update \
 
 RUN mkdir /run/php && chown www-data:www-data /run/php && chmod 755 /run/php
 
-# COPY ./conf /etc/php/8.2/fpm/pool.d
 
 COPY ./tools/setup.sh entrypoint.d/
 

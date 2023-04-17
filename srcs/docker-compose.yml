@@ -6,10 +6,14 @@ services:
     container_name: mariadb_c
     volumes:
       - mariadb_db:/var/lib/mysql
-    env_file:
-      - ./.env
+    environment:
+      - MARIADB_DATABASE=${MARIADB_DATABASE}
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+
     networks:
-      - np
+      - inception_net
     restart: always
 
   wordpress:
@@ -21,10 +25,26 @@ services:
     depends_on:
       - mariadb
       - redis
-    env_file:
-      - ./.env
+    environment:
+      - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
+      - WORDPRESS_ROOT_PASSWORD=${WORDPRESS_ROOT_PASSWORD}
+      - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
+      - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
+      - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
+      - WORDPRESS_TABLE_PREFIX=${WORDPRESS_TABLE_PREFIX}
+      # Wordpress website configuration
+      - WORDPRESS_SITE_TITLE=${WORDPRESS_SITE_TITLE}
+      #   ADMIN user
+      - WORDPRESS_SITE_ADMIN_USER=${WORDPRESS_SITE_ADMIN_USER}
+      - WORDPRESS_SITE_ADMIN_PASSWORD=${WORDPRESS_SITE_ADMIN_PASSWORD}
+      - WORDPRESS_SITE_ADMIN_EMAIL=${WORDPRESS_SITE_ADMIN_EMAIL}
+      #   REGULAR user
+      - DOMAIN_NAME=${DOMAIN_NAME}
+      - WORDPRESS_SITE_USER=${WORDPRESS_SITE_USER}
+      - WORDPRESS_SITE_USER_PASSWORD=${WORDPRESS_SITE_USER_PASSWORD}
+      - WORDPRESS_SITE_USER_EMAIL=${WORDPRESS_SITE_USER_EMAIL}
     networks:
-      - np
+      - inception_net
     restart: always
   
   nginx:
@@ -33,15 +53,15 @@ services:
     container_name: nginx_c
     depends_on:
       - wordpress
-    env_file:
-      - ./.env
+    environment:
+      - DOMAIN_NAME=${DOMAIN_NAME}
     volumes:
       - wordpress_vol:/var/www/html
     ports:
       - "443:443"
     restart: always
     networks:
-      - np
+      - inception_net
 # ============================= Bonus part ===============================
   redis:
     build: ./requirements/bonus/redis
@@ -49,7 +69,7 @@ services:
     container_name: redis_c
     restart: always
     networks:
-      - np
+      - inception_net
 
   ftp:
     build: ./requirements/bonus/ftp
@@ -68,7 +88,7 @@ services:
       - FTP_PASS=${FTP_PASS}
     restart: always
     networks:
-      - np
+      - inception_net
 
   static:
     build: ./requirements/bonus/static
@@ -88,7 +108,24 @@ services:
       - "81:81"
     restart: always
     networks:
-      - np
+      - inception_net
+  
+  cadvisor:
+    build: ./requirements/bonus/cadvisor
+    image: cadvisor:latest
+    container_name: cadvisor_c
+    ports:
+      - "8888:8080"
+    volumes:
+      - "/:/rootfs:ro"
+      - "/var/run:/var/run:ro"
+      - "/sys:/sys:ro"
+      - "/var/lib/docker/:/var/lib/docker:ro"
+      - "/dev/disk/:/dev/disk:ro"
+      - "/dev/kmsg:/dev/kmsg"
+    privileged: true
+    restart: always
+
 # ============================= Volumes and stuff ==========================
 volumes:
     mariadb_db:
@@ -102,7 +139,7 @@ volumes:
         o: bind
         device: /home/haitkadi/data/site-files
 networks:
-      np:
+      inception_net:
         driver: bridge
  
  

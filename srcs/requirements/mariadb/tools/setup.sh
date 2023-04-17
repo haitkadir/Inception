@@ -1,5 +1,8 @@
 #!/bin/bash
 
+sed -i 's/^bind-address\b/bind-address = 0.0.0.0 #/1' /etc/mysql/mariadb.conf.d/50-server.cnf
+
+
 service mysql start 
 sleep 1
 mysql -u root -p"$MARIADB_ROOT_PASSWORD" -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$MARIADB_ROOT_PASSWORD';"

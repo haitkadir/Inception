@@ -17,7 +17,7 @@ services:
     image: wordpress:latest
     container_name: wordpress_c
     volumes:
-      - wordpress_db:/var/www/html
+      - wordpress_vol:/var/www/html
     depends_on:
       - mariadb
       - redis
@@ -36,7 +36,7 @@ services:
     env_file:
       - ./.env
     volumes:
-      - wordpress_db:/var/www/html
+      - wordpress_vol:/var/www/html
     ports:
       - "443:443"
     restart: always
@@ -58,11 +58,11 @@ services:
     depends_on:
       - wordpress
     volumes:
-      - wordpress_db:/home/${FTP_USER}/ftp
+      - wordpress_vol:/home/${FTP_USER}/ftp/files
     ports:
       - "21:21"
       - "20:20"
-      - "1024-1048:1024-1048"
+      - "40000-40005:40000-40005"
     environment:
       - FTP_USER=${FTP_USER}
       - FTP_PASS=${FTP_PASS}
@@ -75,12 +75,12 @@ volumes:
       driver_opts:
         type: none
         o: bind
-        device: /home/ubuntu/data/db     
-    wordpress_db:
+        device: /home/haitkadi/data/db     
+    wordpress_vol:
       driver_opts:
         type: none
         o: bind
-        device: /home/ubuntu/data/site-files
+        device: /home/haitkadi/data/site-files
 networks:
       np:
         driver: bridge

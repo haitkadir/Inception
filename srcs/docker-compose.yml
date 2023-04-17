@@ -69,6 +69,26 @@ services:
     restart: always
     networks:
       - np
+
+  static:
+    build: ./requirements/bonus/static
+    image: static:latest
+    container_name: static_c
+    ports:
+      - "88:88"
+    restart: always
+
+  adminer:
+    build: ./requirements/bonus/adminer
+    image: adminer:latest
+    container_name: adminer_c
+    depends_on:
+      - mariadb
+    ports:
+      - "81:81"
+    restart: always
+    networks:
+      - np
 # ============================= Volumes and stuff ==========================
 volumes:
     mariadb_db:

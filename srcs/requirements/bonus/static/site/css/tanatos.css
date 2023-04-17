@@ -1,0 +1,440 @@
+body{
+    font-family: 'Open Sans', sans-serif;
+}
+
+/*start global*/
+*{
+    box-sizing: border-box;
+}
+.manColor{
+    color: #F7600e;
+}
+.overlay{
+    width: 100%;
+    height: 100%;
+    background: rgba(1, 4, 13, 0.62);
+}
+.hidden{
+    display: none;
+}
+
+/*End global*/
+/*start section header*/
+.header{
+    width: 100%;
+    height: 600px;
+    text-align: center;
+    background: url('../images/slider/lap.jpg');
+    -wibket-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: #fff;
+}
+.header .logo, .header .menu{
+    margin-top: 20px
+}
+.header .logo{
+    float: left;
+}
+.header .menu{
+    float: right;
+}
+.header .intro{
+    margin-top: 122px;
+    margin-bottom: 151px;
+}
+.header .intro .h1{
+    margin-bottom: 25px;
+}
+.header .intro p{
+    margin-bottom: 40px;
+}
+.header .intro .buttons button{
+    background: transparent;
+    color: #FFF;
+    width: 147px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    transition: all .3s ease-in-out;
+}
+.header .intro .buttons button:first-child{
+    margin-right: 30px
+}
+.header .intro .buttons button:hover{
+    background: #F7600e;
+    border-color: #F7600e;
+}
+.header .arrow{
+    border: 2px solid #ccc;
+    padding: 6px 8px;
+    border-radius: 50%;
+}
+/*start features*/
+.features{
+    padding-top: 50px;
+    padding-bottom: 50px;
+    text-align: center;
+}
+.features i{
+    color: #F7600e;
+    border: 1px solid #ccc;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    line-height: 110px;
+    margin-bottom: 20px;
+}
+.features h3{
+    margin-bottom: 20px;
+}
+.features p{
+    line-height: 27px;
+}
+/*start section Subscribe*/
+.subscribe{
+    background: url('../images/slider/smual.jpg');
+    -wibket-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.subscribe .overlay{
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+.subscribe input[type="email"]{
+    width: 450px;
+    border-radius: 7px;
+    border: none;
+    height: 35px;
+    margin-right: 22px;
+    padding-left: 10px;
+}
+.subscribe button{
+    border: 1px solid #f7600e;
+    background: none;
+    color: #FFF;
+    width: 167px;
+    font-size: 18px;
+    height: 36px;
+    border-radius: 7px;
+    transition: all .3s ease-in-out;
+}
+.subscribe button:hover{
+    background: #f7600e;
+}
+/*Start Our Work*/
+.our-work{
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-bottom: 40px;
+}
+.our-work h2{
+    margin-bottom: 20pxpx;
+}
+.our-work p{
+    margin-bottom: 40px;
+}
+.our-work .work{
+    margin-bottom: 25px;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+}
+.our-work .work img{
+    max-width: 100%;
+}
+.our-work .work .over{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding-top: 46px;
+    background: rgba(247, 96, 14, .8);
+    color: #FFF;
+    
+}
+
+.our-work .work .over h4{
+    margin-bottom: 36px;
+}
+.our-work .work .over button{
+    background: #FFF;
+    border: 1px solid #F7600e;
+    width: 219px;
+    height: 48px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: all .3s ease-in-out;
+}
+.our-work .work .over button:hover{
+    background: #F7600e;
+    color: #FFF;
+    border-color: #CCC;
+}
+.our-work .show-more{
+    width: 200px;
+    margin: auto;
+    padding: 7px;
+    border: 1px solid #F7600e;
+    background: #FFF;
+    border-radius: 8px;
+    color: #F7600e;
+}
+.our-work .show-more:hover{
+    background: #F7600e;
+    border-color: #CCC;
+    color: #FFF;
+}
+/*Start testimonials*/
+.testim{
+    background: url('../images/slider/12.jpg');
+    -wibket-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: #FFF
+}
+.testim .overlay{
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+.testim .container{
+    position: relative;
+}
+.testim i{
+    position: absolute;
+    top: 40%;
+    background: transparent;
+    padding: 11px;
+    border-radius: 10px;
+    border: 1px solid #CCC;
+}
+.testim i:hover{
+    background: #F7600e;
+    border-color: #F7600e;
+}
+.testim i.fa-chevron-left{
+    left: 5px;
+    padding-right: 14px;
+}
+.testim i.fa-chevron-right{
+    right: 5px;
+    padding-left: 14px;
+}
+.client img{
+    border-radius: 50%;
+    margin-bottom: 24px;
+}
+.client p{
+    font-style: italic;
+}
+/*Start Our team*/
+.our-team{
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.our-team h2{
+    margin-bottom: 20px;
+}
+.our-team p{
+    margin-bottom: 20px;
+}
+.our-team .person{
+    filter: gray;
+    filter: grayscale(1);
+    transition: all .3s ease-in-out;
+}
+.our-team .person img{
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+.our-team .person h4{
+    margin-bottom: 15px;
+    color: #c6c6c5;
+    transition: all .3s ease-in-out;
+}
+.our-team .person .social-icons i{
+    border-radius: 50%;
+    margin-bottom: 15px;
+    color: #fff;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    transition: all .3s ease-in-out;
+}
+.our-team .person .social-icons i.fa-facebook{
+    background: #3b5998
+}
+.our-team .person .social-icons .fa-twitter{
+    background: #55acee
+}
+.our-team .person .social-icons .fa-google-plus{
+    background: #dc4e41
+}
+.our-team .person p{
+    color: #9b9a9a;
+    transition: all .3s ease-in-out;
+}
+
+
+.our-team .person:hover{
+    filter: none;
+    filter: grayscale(0);
+}
+.our-team .person:hover h4,
+.our-team .person:hover p{
+    color: #242424
+}
+/*Start Contact Us*/
+.contact{
+    background: url('../images/slider/bg9.jpg');
+    -wibket-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: #FFF
+}
+.contact .overlay{
+    padding-top: 60px;
+    padding-bottom: 50px;
+    background: rgba(1, 4, 13, 0.52);
+}
+.contact h2{
+    margin-bottom: 20px;
+}
+.contact p{
+    margin-bottom: 60px;
+}
+.contact form{
+    width: 700px;
+    margin: auto;
+    
+}
+.contact form input[type="email"],
+.contact form input[type="text"]{
+    width: 47%;
+    height: 35px;
+    border: none;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    padding-left: 5px
+}
+.contact form input[type="email"]{
+    float: left
+}
+.contact form input[type="text"]{
+    float: right
+}
+.contact form textarea{
+    width: 100%;
+    height: 162px;
+    border-radius: 6px;
+    resize: none;
+    margin-bottom: 11px;
+    padding-left: 5px
+}
+.contact form button{
+    border: 1px solid #f7600e;
+    width: 155px;
+    padding: 4px;
+    border-radius: 6px;
+    background: #f7600e;
+    color: #fff;
+    float: left;
+}
+.contact form .social-icons{
+    float: right
+}
+.contact form .social-icons i{
+    color: #fff;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 50%;
+    font-size: 20px;
+}
+.contact form .social-icons i.fa-facebook{
+    background: #3b5998
+}
+.contact form .social-icons .fa-twitter{
+    background: #55acee
+}
+.contact form .social-icons .fa-google-plus{
+    background: #dc4e41
+}
+.contact form .clear{
+    clear: both;
+}
+/*start footer*/
+.footer{
+    background: #333;
+    color: #c6c6c6;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    overflow: hidden
+}
+.footer .copyright{
+    float: left
+}
+.footer .design{
+    float: right
+}
+/*Start media Query*/
+@media (min-width: 0) and (max-width: 767px){
+    .contact form{
+        width: auto;
+    }
+    .subscribe input[type="email"]{
+        max-width: 100%;
+        margin-bottom: 15px
+    }
+    .header .intro .buttons button:first-child{
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    .header .intro{
+        margin-top: 15px;
+        margin-bottom: 100px;
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
